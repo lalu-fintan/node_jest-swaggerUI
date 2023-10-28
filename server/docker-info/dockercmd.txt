@@ -1,0 +1,77 @@
+* docker build . -t laluprasath/node_jes-swaggerui:v1 = to build the container
+* docker run -d -p 4001:4000 laluprasath/node_jest-swaggerui:v1  = to run the container
+* docker run -d -p 4001:4000 -v ${pwd}:/app --name node-container laluprasath/node_jest-swaggerui:v3
+* docker run -d -p 4002:5001 -v ${pwd}:/app --env-file ./.env --name node-env-container laluprasath/node_jest-swaggerui:v3
+* docker ps = shows running container details
+* docker ps -a  = shows all the containers
+* docker logs [container id] = to see the terminal log of that container
+* docker start -i [container id] = starts the  container
+* docker stop [container id] = stops a specific container
+* docker rm [container id] = removes a stopped container from list of all containers
+* docker rm [image id] = remove an image
+* docker images = lists down all the downloaded images
+* docker exec -it ebe735dc70d9 /bin/sh = check the file structure
+* docker system prune -a = to remove all the container and images
+
+
+# docker-compose
+* docker-compose up -d = runs in detached mode
+* docker-compose up = runs the containers
+* docker-compose down = to stop the container
+* docker-compose down --rmi all = to stop the container and remove the image
+
+
+
+for normal code without production for node_jes
+
+FROM node:18 as base
+
+# create app directory
+WORKDIR  /app
+
+# install app depentancies
+COPY  package*.json ./
+
+# npm install 
+RUN npm install 
+
+#bundle app source 
+COPY  . .
+
+# build 
+RUN  npm run build
+
+# port
+EXPOSE 4000
+
+# execute command
+
+CMD [ "npm","start" ]
+
+
+
+
+production
+
+
+version: "3.7"
+services:
+  node-jest-swaggerui:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: base
+
+    volumes:
+      - ./src:/home/node/app/src
+      - ./nodemon.json:/home/node/app/nodemon.json
+
+    container_name: node-jest-swaggerui
+
+    expose:
+      - "4000"
+
+    ports:
+      - "4000:4000"
+
+    command: npm start

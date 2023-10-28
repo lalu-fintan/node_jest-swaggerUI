@@ -1,0 +1,9 @@
+* create account in docker hub.
+* use same crentials in docker desktop and docker hub .
+* crate repository in docker-hub.
+* copy the repo name (ex:laluprasath02/my-app)
+* build the container to use same repo name (ex:laluprasath02/my-app) = docker build . -t laluprasath02/my-app
+* docker push laluprasath02/my-app = it will  automatically upload  into the hub.
+
+
+if you want use the image = docker pull laluprasath02/my-app

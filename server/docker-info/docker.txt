@@ -1,0 +1,30 @@
+images:
+  It's like blue print for a containers, 
+  which means it just store the some depentancies, like runtime enviroinment,depentancies and commands.
+
+  images made up with several layers.
+
+  1.parent image
+  2.source code 
+  3.depentancies
+  4.run command
+
+
+  1.parent image - which means our os , like node or python or php something.
+
+container:
+It running instance of our image, and run our application
+Dockerfile is used to create an automated Docker build that can be executed on any system with Docker installed.
+
+
+volumes:
+  it same like a nodmon , when ever w change anything in our code then if we run the container it show the build code process only ,
+  - are used to persist data outside container lifecycle
+  - they can be binded to host machine filesystem
+  it's only for dev perpose , if we want to share the image toanyone we need to rebuild the container.
+
+
+  compose:
+   if we use multiple images like node ,mongodb and react , then we build all the image to be container , that's why we use compose.
+   is tool that helps in managing multi-container docker applications.
+   
